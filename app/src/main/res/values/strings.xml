@@ -2,4 +2,7 @@
     <string name="app_name">Final Term Project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="FoodLog">Food Log</string>
+    <string name="Report">Report</string>
+    <string name="Profile">Profile</string>
 </resources>
