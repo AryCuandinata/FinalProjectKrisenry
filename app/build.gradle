@@ -1,11 +1,13 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    apply plugin: "androidx.navigation.safeargs.kotlin"
 
     defaultConfig {
         applicationId "id.ac.ubaya.informatika.finaltermproject"
