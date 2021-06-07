@@ -2,7 +2,7 @@ package id.ac.ubaya.informatika.finaltermproject.view.model
 
 import java.util.*
 
-data class Student(
+data class User(
     val name:String?,
     val age:Int?,
     val gender:String?,
@@ -11,7 +11,7 @@ data class Student(
     val personalGoal:Int?
 )
 
-data class FoodLog(
+data class FoodJurnal(
     val meal:String?,
     val calories:Int?,
     val date:Date?
