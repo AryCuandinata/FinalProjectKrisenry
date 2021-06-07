@@ -11,7 +11,7 @@ import id.ac.ubaya.informatika.finaltermproject.view.model.FoodJurnal
 
 class FoodjurnalListAdapter(val foodList:ArrayList<FoodJurnal>):RecyclerView.Adapter<FoodjurnalListAdapter.FoodJurnalViewHolder>() {
 
-    class FoodJurnalViewHolder(var view: FoodJurnalItemListBinding) : RecyclerView.ViewHolder(view)
+    class FoodJurnalViewHolder(var view: FoodJurnalItemListBinding) : RecyclerView.ViewHolder(view.root)
 
     fun updateFoodJurnalList(newFoodJurnalList:List<FoodJurnal>){
         foodList.clear()
