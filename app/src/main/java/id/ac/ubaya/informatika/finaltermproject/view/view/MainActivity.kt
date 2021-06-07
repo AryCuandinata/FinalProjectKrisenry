@@ -1,4 +1,4 @@
-package id.ac.ubaya.informatika.finaltermproject.view
+package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

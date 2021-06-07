@@ -1,4 +1,4 @@
-package id.ac.ubaya.informatika.finaltermproject.view
+package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

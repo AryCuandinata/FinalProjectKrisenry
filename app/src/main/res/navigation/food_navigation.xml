@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/itemFoodLog"
-        android:name="id.ac.ubaya.informatika.finaltermproject.view.FoodJurnalFragment"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.FoodJurnalFragment"
         android:label="FoodJurnalFragment" >
         <action
             android:id="@+id/action_foodJurnalFragment_to_logAMealFragment"
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemProfile"
-        android:name="id.ac.ubaya.informatika.finaltermproject.view.ProfileFragment"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
