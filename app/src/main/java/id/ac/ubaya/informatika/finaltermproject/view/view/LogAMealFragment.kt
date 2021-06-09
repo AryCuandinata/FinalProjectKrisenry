@@ -1,4 +1,4 @@
-package id.ac.ubaya.informatika.finaltermproject.view
+package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import id.ac.ubaya.informatika.finaltermproject.R
 
-
-class FoodJurnalFragment : Fragment() {
+class LogAMealFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_jurnal, container, false)
+        return inflater.inflate(R.layout.fragment_log_a_meal, container, false)
     }
-
 }
