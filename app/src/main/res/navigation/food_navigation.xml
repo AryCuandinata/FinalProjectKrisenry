@@ -7,10 +7,10 @@
 
     <fragment
         android:id="@+id/itemFoodLog"
-        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.FoodJurnalFragment"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.FoodLogFragment"
         android:label="FoodJurnalFragment" >
         <action
-            android:id="@+id/action_foodJurnalFragment_to_logAMealFragment"
+            android:id="@+id/action_foodLog_logAMeal"
             app:destination="@id/logAMealFragment" />
         <argument
             android:name="Calorie"
