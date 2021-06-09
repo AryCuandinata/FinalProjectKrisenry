@@ -1,7 +1,9 @@
 package id.ac.ubaya.informatika.finaltermproject.view.model
 
+import androidx.room.Entity
 import java.util.*
 
+@Entity
 data class User(
     val name:String?,
     val age:Int?,
@@ -11,7 +13,8 @@ data class User(
     val personalGoal:Int?
 )
 
-data class FoodJurnal(
+@Entity
+data class FoodLog(
     val meal:String?,
     val calories:Int?,
     val date:Date?
