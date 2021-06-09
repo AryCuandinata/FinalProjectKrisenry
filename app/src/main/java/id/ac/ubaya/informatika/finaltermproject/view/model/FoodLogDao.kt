@@ -1,16 +1,17 @@
 package id.ac.ubaya.informatika.finaltermproject.view.model
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
+@Dao
 interface FoodLogDao {
-    @Dao
-    interface TodoDao {
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        suspend fun insertAll(vararg todo:FoodLog)
-        @Query("SELECT * FROM foodlog")
-        suspend fun selectAllTodo(): List<FoodLog>
-    }
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(vararg foodLog: FoodLog)
+
+    @Query("SELECT * FROM foodlog")
+    suspend fun selectAllFoodLog(): List<FoodLog>
+
+    @Delete
+    suspend fun deleteFoodLog(foodLog: FoodLog)
 }
+

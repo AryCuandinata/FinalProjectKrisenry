@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.ac.ubaya.informatika.finaltermproject.R
-import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListViewModel
+import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListFoodLogViewModel
 
 
 class FoodLogFragment : Fragment() {
-    private lateinit var viewModel: ListViewModel
+    private lateinit var foodLogViewModel: ListFoodLogViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
