@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.finaltermproject.R
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
+import kotlinx.android.synthetic.main.food_log_item_list.view.*
 
 class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>):RecyclerView.Adapter<FoodLogAdapter.FoodLogViewHolder>() {
+
     class FoodLogViewHolder(val view: View):RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodLogViewHolder {
@@ -16,11 +18,18 @@ class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>):RecyclerView.Adapter<F
         return FoodLogViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: FoodLogViewHolder, position: Int) {
-        
-    }
-
     override fun getItemCount(): Int {
         return foodLogList.size
+    }
+
+    fun updateTodoList(newTodoList: List<FoodLog>) {
+        foodLogList.clear()
+        foodLogList.addAll(newTodoList)
+        notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(holder: FoodLogViewHolder, position: Int) {
+        holder.view.txtName.setText(foodLogList[position].meal.toString())
+        holder.view.txtCalories.setText(foodLogList[position].calories.toString())
     }
 }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(FoodLog::class), version = 1)
+@Database(entities = arrayOf(FoodLog::class,Report::class), version = 1)
 abstract class FoodLogDatabase: RoomDatabase(){
     abstract fun foodLogDao(): FoodLogDao
     abstract fun reportDao(): ReportDao
