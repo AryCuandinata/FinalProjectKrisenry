@@ -10,11 +10,10 @@
         android:name="id.ac.ubaya.informatika.finaltermproject.view.view.FoodLogFragment"
         android:label="FoodJurnalFragment" >
         <action
-            android:id="@+id/action_foodLog_logAMeal"
-            app:destination="@id/logAMealFragment" />
-        <argument
-            android:name="Calorie"
-            app:argType="integer" />
+            android:id="@+id/action_itemFoodLog_to_logAMealFragment"
+            app:destination="@id/logAMealFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/itemProfile"
@@ -23,12 +22,12 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/logAMealFragment"
-        android:name="id.ac.ubaya.informatika.finaltermproject.view.LogAMealFragment"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.LogAMealFragment"
         android:label="fragment_log_a_meal"
         tools:layout="@layout/fragment_log_a_meal" />
     <fragment
         android:id="@+id/itemReport"
-        android:name="id.ac.ubaya.informatika.finaltermproject.view.ReportFragment"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
 </navigation>

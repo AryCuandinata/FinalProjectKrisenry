@@ -42,10 +42,10 @@ data class FoodLog(
 
 @Entity
 data class Report(
-@ColumnInfo(name="Date")
-var date:String,
-@ColumnInfo(name="Calories")
-var calories: Int?
+    @ColumnInfo(name="Date")
+    var date:String,
+    @ColumnInfo(name="Calories")
+    var calories: Int?
 ){
     @PrimaryKey(autoGenerate = true)
     var uuid:Int=0
