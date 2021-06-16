@@ -40,7 +40,6 @@ class ListFoodLogViewModel(application: Application):AndroidViewModel(applicatio
 
             foodLD.value = db.foodLogDao().selectAllFoodLog()
         }
-
     }
 
     fun clearTask(foodLog: FoodLog) {

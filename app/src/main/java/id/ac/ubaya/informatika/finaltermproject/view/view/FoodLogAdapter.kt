@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.ac.ubaya.informatika.finaltermproject.R
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
+import id.ac.ubaya.informatika.finaltermproject.view.model.User
 import kotlinx.android.synthetic.main.food_log_item_list.view.*
+import kotlinx.android.synthetic.main.fragment_food_log.view.*
 
-class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>):RecyclerView.Adapter<FoodLogAdapter.FoodLogViewHolder>() {
+class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>, val user: ArrayList<User>):RecyclerView.Adapter<FoodLogAdapter.FoodLogViewHolder>() {
 
     class FoodLogViewHolder(val view: View):RecyclerView.ViewHolder(view)
 
