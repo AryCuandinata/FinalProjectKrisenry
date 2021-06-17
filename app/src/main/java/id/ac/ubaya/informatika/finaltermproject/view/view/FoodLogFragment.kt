@@ -22,6 +22,7 @@ class FoodLogFragment : Fragment() {
     private lateinit var viewModelUser: ListUserViewModel
     private val foodLogAdapter  = FoodLogAdapter(arrayListOf(),arrayListOf())
 
+    var value = false
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -34,15 +35,10 @@ class FoodLogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModelUser = ViewModelProvider(this).get(ListUserViewModel::class.java)
-
-        if(textViewGender.text == "1"){
-            val action = FoodLogFragmentDirections.actionItemFoodLogToWelcomeFragment()
-            Navigation.findNavController(view).navigate(action)
-        }
+        viewModelUser.refresh()
 
         viewModel  = ViewModelProvider(this).get(ListFoodLogViewModel::class.java)
         viewModel.refresh()
-
 
         recViewFoodLog.layoutManager = LinearLayoutManager(context)
         recViewFoodLog.adapter = foodLogAdapter
@@ -70,11 +66,17 @@ class FoodLogFragment : Fragment() {
 
     fun observeViewModelUser() {
         viewModelUser.userLD.observe(
-            viewLifecycleOwner, Observer {
-                viewModelUser = ViewModelProvider(this).get(ListUserViewModel::class.java)
-                viewModel.refresh()
-
-            })
+                viewLifecycleOwner, Observer {
+            foodLogAdapter.updateTodoListUser(it)
+            if (it.isEmpty()) {
+                val action = FoodLogFragmentDirections.actionItemFoodLogToWelcomeFragment()
+                Navigation.findNavController(requireView()).navigate(action)
+            } else {
+                textViewGender.setText((it[0].gender.toString()))
+                textViewAge.setText((it[0].age.toString()))
+                textViewName.setText((it[0].name.toString()))
+            }
+        })
     }
 
 }

@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/buttonStart"
             android:layout_width="378dp"
             android:layout_height="47dp"
             android:layout_marginStart="16dp"
@@ -44,21 +44,25 @@
             app:layout_constraintTop_toBottomOf="@+id/textView14">
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/radioButtonMaintain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
+                android:tag="1"
                 android:text="Maintain Weight" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/radioButtonGainWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="2"
                 android:text="Gain Weight" />
 
             <RadioButton
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioButtonLossWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:tag="3"
                 android:text="Loss Weight" />
         </RadioGroup>
 

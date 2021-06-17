@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.welcomeFragment) {
-
                 bottomNav.visibility = View.GONE
+                getSupportActionBar()?.hide()
             } else {
 
                 bottomNav.visibility = View.VISIBLE
