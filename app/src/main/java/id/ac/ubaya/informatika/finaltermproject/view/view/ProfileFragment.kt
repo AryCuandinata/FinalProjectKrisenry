@@ -24,6 +24,9 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var A: Int
         A = 12
+
+        var b: Int
+        b = 0
     }
 
 }
