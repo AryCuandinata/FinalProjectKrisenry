@@ -25,8 +25,7 @@ import java.time.format.DateTimeFormatter
 class LogAMealFragment : Fragment() {
     private lateinit var viewModel: ListFoodLogViewModel
     private lateinit var viewModelUser: ListUserViewModel
-    lateinit var listUser: ArrayList<User>
-
+    var listUser: ArrayList<User> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +35,8 @@ class LogAMealFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProvider(this).get(ListFoodLogViewModel::class.java)
+        viewModelUser = ViewModelProvider(this).get(ListUserViewModel::class.java)
+        viewModelUser.refresh()
         btnLogThisMeal.setOnClickListener {
             val sdf = SimpleDateFormat("yyyy.MM.dd")
             var model = FoodLog(
@@ -73,7 +73,7 @@ class LogAMealFragment : Fragment() {
             } else if (it[0].personalGoal == 3) {
                 calories -= (calories * 15 / 100)
             }
-            txtCal.text = calories.toString()
+            txtCal.text = "<b>"+Math.round(calories).toString()+"cal </b>" + "needed today"
         })
     }
 
