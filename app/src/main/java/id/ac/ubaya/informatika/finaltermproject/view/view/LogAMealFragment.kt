@@ -6,17 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import id.ac.ubaya.informatika.finaltermproject.R
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
+import id.ac.ubaya.informatika.finaltermproject.view.model.User
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListFoodLogViewModel
+import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListUserViewModel
 import kotlinx.android.synthetic.main.fragment_log_a_meal.*
+import kotlinx.android.synthetic.main.fragment_log_a_meal.txtDate
+import kotlinx.android.synthetic.main.fragment_report.*
 import java.sql.Date
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class LogAMealFragment : Fragment() {
     private lateinit var viewModel:ListFoodLogViewModel
+    private lateinit var viewModelUser: ListUserViewModel
+    lateinit var listUser: ArrayList<User>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +45,29 @@ class LogAMealFragment : Fragment() {
             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
             Navigation.findNavController(it).popBackStack()
         }
+        val date = LocalDateTime.now()
+        val format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+        val currentDate = date.format(format)
+        txtDate.text = currentDate
+    }
+
+    fun calculateCalories(){
+        viewModelUser.userLD.observe(viewLifecycleOwner, Observer{
+            updateTodoListUser(it)
+            var calories: Double
+            if(it[0].gender.toString() == "Male"){
+                calories = 13.397*it[0].weight!!.toDouble() + 4.799*it[0].height!!.toDouble() - 5.677*it[0].age!!.toDouble() + 88.362
+            }
+            else{
+                calories = 9.247*it[0].weight!!.toDouble() + 3.098*it[0].height!!.toDouble() - 4.330*it[0].age!!.toDouble() + 447.593
+            }
+
+
+        })
+    }
+    fun updateTodoListUser(newTodoListUser: List<User>) {
+        listUser.clear()
+        listUser.addAll(newTodoListUser)
     }
 
 
