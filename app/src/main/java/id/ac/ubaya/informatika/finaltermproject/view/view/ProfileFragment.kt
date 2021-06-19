@@ -24,7 +24,6 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var A = 10
-        var b: Int
-        b = 10
+        var C = 3
     }
 }
