@@ -2,7 +2,6 @@ package id.ac.ubaya.informatika.finaltermproject.view.model
 
 import androidx.room.*
 
-
     @Dao
     interface ReportDao {
 
