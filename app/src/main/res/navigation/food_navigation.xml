@@ -14,6 +14,14 @@
             app:destination="@id/logAMealFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_itemFoodLog_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_itemFoodLog_to_welcomeActivity"
+            app:destination="@id/welcomeActivity" />
     </fragment>
     <fragment
         android:id="@+id/itemProfile"
@@ -30,4 +38,17 @@
         android:name="id.ac.ubaya.informatika.finaltermproject.view.view.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_itemFoodLog2"
+            app:destination="@id/itemFoodLog" />
+    </fragment>
+    <activity
+        android:id="@+id/welcomeActivity"
+        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.WelcomeActivity"
+        android:label="WelcomeActivity" />
 </navigation>
