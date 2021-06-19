@@ -32,7 +32,12 @@
         android:id="@+id/logAMealFragment"
         android:name="id.ac.ubaya.informatika.finaltermproject.view.view.LogAMealFragment"
         android:label="fragment_log_a_meal"
-        tools:layout="@layout/fragment_log_a_meal" />
+        tools:layout="@layout/fragment_log_a_meal" >
+        <argument
+            android:name="neededCalories"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/itemReport"
         android:name="id.ac.ubaya.informatika.finaltermproject.view.view.ReportFragment"
