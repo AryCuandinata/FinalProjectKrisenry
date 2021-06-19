@@ -23,7 +23,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val a = "krisna"
+        var A = 10
+        var b: Int
+        b = 10
     }
-
 }
