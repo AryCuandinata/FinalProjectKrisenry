@@ -7,6 +7,7 @@ import androidx.room.Room
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLogDatabase
 import id.ac.ubaya.informatika.finaltermproject.view.model.User
+import id.ac.ubaya.informatika.finaltermproject.view.util.buildDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -27,29 +28,33 @@ class ListUserViewModel(application: Application): AndroidViewModel(application)
 
     fun insertUser(list: List<User>){
         launch {
-            val db = Room.databaseBuilder(
-                    getApplication(), FoodLogDatabase::class.java,"newfoodlogdb").build()
-
+            val db = buildDb(getApplication())
             db.userDao().insertAll(*list.toTypedArray())
         }
     }
 
-    fun update(name:String,age:Int,gender:String, weight:Int, height:Int, personalGoal:Int, uuid:Int) {
+    fun update(name:String,age:Int,gender:String, weight:Int, height:Int, uuid:Int) {
         launch {
-            val db = Room.databaseBuilder(
-                    getApplication(), FoodLogDatabase::class.java,"newfoodlogdb").build()
-
-            db.userDao().update(name,age,gender,weight,height,personalGoal,uuid)
+            val db = buildDb(getApplication())
+            db.userDao().update(name,age,gender,weight,height,uuid)
         }
     }
+
+
+    fun fetch(uuid: Int){
+        launch {
+            val db = buildDb(getApplication())
+            userLD.value = db.userDao().selectAllUser()
+        }
+    }
+
+
 
     fun refresh() {
         userLoadErrorLD.value = false
         userloadingLD.value = false
         launch {
-            val db = Room.databaseBuilder(
-                    getApplication(), FoodLogDatabase::class.java, "newfoodlogdb"
-            ).build()
+            val db = buildDb(getApplication())
 
             userLD.value = db.userDao().selectAllUser()
         }
