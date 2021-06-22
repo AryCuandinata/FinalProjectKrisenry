@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.finaltermproject.R
+import id.ac.ubaya.informatika.finaltermproject.databinding.FoodLogItemListBinding
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListFoodLogViewModel
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListUserViewModel
 import kotlinx.android.synthetic.main.fragment_food_log.*

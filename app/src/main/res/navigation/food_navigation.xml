@@ -20,14 +20,18 @@
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
         <action
-            android:id="@+id/action_itemFoodLog_to_welcomeActivity"
-            app:destination="@id/welcomeActivity" />
+            android:id="@+id/action_itemFoodLog_to_itemProfile"
+            app:destination="@id/itemProfile" />
     </fragment>
     <fragment
         android:id="@+id/itemProfile"
         android:name="id.ac.ubaya.informatika.finaltermproject.view.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <argument
+            android:name="uuid"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/logAMealFragment"
         android:name="id.ac.ubaya.informatika.finaltermproject.view.view.LogAMealFragment"
@@ -52,8 +56,4 @@
             android:id="@+id/action_welcomeFragment_to_itemFoodLog2"
             app:destination="@id/itemFoodLog" />
     </fragment>
-    <activity
-        android:id="@+id/welcomeActivity"
-        android:name="id.ac.ubaya.informatika.finaltermproject.view.view.WelcomeActivity"
-        android:label="WelcomeActivity" />
 </navigation>
