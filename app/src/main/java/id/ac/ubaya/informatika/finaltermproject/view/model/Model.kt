@@ -12,7 +12,7 @@ data class User(
     @ColumnInfo(name="age")
     var age:Int?,
     @ColumnInfo(name="gender")
-    var gender:String?,
+    var gender:Int?,
     @ColumnInfo(name="weight")
     var weight:Int?,
     @ColumnInfo(name="height")

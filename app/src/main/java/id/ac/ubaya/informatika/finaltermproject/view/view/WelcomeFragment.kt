@@ -40,7 +40,7 @@ class WelcomeFragment : Fragment(){
         buttonStart.setOnClickListener {
             val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
             val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
-            var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radioGender.tag.toString(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio.tag.toString().toInt())
+            var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radioGender.tag.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio.tag.toString().toInt())
             val list = listOf(model)
             viewModel.insertUser(list)
             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
