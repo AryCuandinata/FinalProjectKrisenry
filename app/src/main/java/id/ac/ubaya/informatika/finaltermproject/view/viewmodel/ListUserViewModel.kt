@@ -33,7 +33,7 @@ class ListUserViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    fun update(name:String,age:Int,gender:String, weight:Int, height:Int, uuid:Int) {
+    fun update(name:String,age:Int,gender:Int, weight:Int, height:Int, uuid:Int) {
         launch {
             val db = buildDb(getApplication())
             db.userDao().update(name,age,gender,weight,height,uuid)

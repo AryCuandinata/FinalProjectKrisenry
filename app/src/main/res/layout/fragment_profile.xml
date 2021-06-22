@@ -7,6 +7,12 @@
         <variable
             name="profile"
             type="id.ac.ubaya.informatika.finaltermproject.view.model.User" />
+        <variable
+            name="radioListener"
+            type="id.ac.ubaya.informatika.finaltermproject.view.view.RadioClick" />
+        <variable
+            name="listener"
+            type="id.ac.ubaya.informatika.finaltermproject.view.view.ProfileSaveChangesClick" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"
@@ -42,6 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@{profile.gender==1?true:false}"
+                    android:onClick="@{(view)->radioListener.onRadioClick(view,1,profile)}"
                     android:tag="1"
                     android:text="Male" />
 
@@ -50,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="@{profile.gender==2?true:false}"
+                    android:onClick="@{(view)->radioListener.onRadioClick(view,2,profile)}"
                     android:tag="2"
                     android:text="Female" />
             </RadioGroup>
@@ -147,7 +155,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/updateprofile"
+                android:text="Update Profile"
+                android:onClick="@{(view)->listener.onProfileSaveChangesClick(view,profile)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
