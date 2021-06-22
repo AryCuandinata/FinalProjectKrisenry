@@ -171,14 +171,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:tag="Male"
+                android:tag="1"
                 android:text="Male" />
 
             <RadioButton
                 android:id="@+id/radioFemale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tag="Female"
+                android:tag="2"
                 android:text="Female" />
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>

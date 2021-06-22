@@ -5,4 +5,9 @@
     <string name="FoodLog">Food Log</string>
     <string name="Report">Report</string>
     <string name="Profile">Profile</string>
+    <string name="editname">Edit Name</string>
+    <string name="editage">Edit Age</string>
+    <string name="editweight">Edit Weight</string>
+    <string name="editheight">Edit Height</string>
+    <string name="updateprofile">Update Profile</string>
 </resources>

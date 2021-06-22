@@ -11,8 +11,8 @@ interface UserDao {
     suspend fun selectAllUser():List<User>
 
     @Query("UPDATE user SET name=:name, age=:age, gender=:gender, weight=:weight, height=:height WHERE uuid=:uuid")
-    suspend fun update(name:String,age:Int,gender:String, weight:Int, height:Int, uuid:Int)
+    suspend fun update(name:String, age:Int, gender: Int, weight:Int, height:Int, uuid:Int)
 
     @Query("SELECT * FROM user WHERE uuid = :id")
-    suspend fun selectTodo(id:Int): List<User>
+    suspend fun selectTodo(id:Int): User
 }
