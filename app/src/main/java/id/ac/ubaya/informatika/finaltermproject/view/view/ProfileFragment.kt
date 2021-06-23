@@ -44,8 +44,13 @@ class ProfileFragment : Fragment(), ProfileSaveChangesClick,RadioClick{
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ListEditUser::class.java)
         viewModel.fetch(1)
+
+        databinding.radioListener = this
+        databinding.listener = this
+
         observeViewModel()
     }
+
     override fun onRadioClick(v: View, gender: Int, obj: User) {
         obj.gender = gender
     }
@@ -55,8 +60,12 @@ class ProfileFragment : Fragment(), ProfileSaveChangesClick,RadioClick{
     }
 
     override fun onProfileSaveChangesClick(v: View, obj: User) {
-        viewModel.update(obj.name.toString(), obj.age.toString().toInt(), obj.gender.toString().toInt(), obj.weight.toString().toInt(),
-                obj.height.toString().toInt() , obj.uuid)
-        Toast.makeText(v.context, "Todo Updated", Toast.LENGTH_SHORT).show()
+        if(textInputAge.text.toString() == "" || textInputName.text.toString() == "" || textInputWeight.text.toString() == "" || textInputHeight.text.toString() == ""){
+            Toast.makeText(v.context, "Cannot Update Profile", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.update(obj.name.toString(), obj.age.toString().toInt(), obj.gender.toString().toInt(), obj.weight.toString().toInt(),
+                    obj.height.toString().toInt() , obj.uuid)
+            Toast.makeText(v.context, "Profile Updated", Toast.LENGTH_SHORT).show()
+        }
     }
 }

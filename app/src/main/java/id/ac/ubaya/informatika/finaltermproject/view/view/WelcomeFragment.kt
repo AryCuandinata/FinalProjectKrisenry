@@ -36,7 +36,6 @@ class WelcomeFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(ListUserViewModel::class.java)
 
-
         buttonStart.setOnClickListener {
             val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
             val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)

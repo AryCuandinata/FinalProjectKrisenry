@@ -2,6 +2,7 @@ package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.view.View
 import android.widget.CompoundButton
+import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
 import id.ac.ubaya.informatika.finaltermproject.view.model.User
 
 interface TodoEditClick {
@@ -14,4 +15,8 @@ interface RadioClick {
 
 interface ProfileSaveChangesClick {
     fun onProfileSaveChangesClick(v: View, obj: User)
+}
+
+interface logThisMealClick {
+    fun onProfileSaveChangesClick(v: View, obj: FoodLog)
 }
