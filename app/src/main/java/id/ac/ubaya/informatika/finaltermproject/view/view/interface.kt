@@ -17,6 +17,7 @@ interface ProfileSaveChangesClick {
     fun onProfileSaveChangesClick(v: View, obj: User)
 }
 
-interface logThisMealClick {
-    fun onProfileSaveChangesClick(v: View, obj: FoodLog)
+interface FabListener {
+    fun onFabListener(v: View)
 }
+

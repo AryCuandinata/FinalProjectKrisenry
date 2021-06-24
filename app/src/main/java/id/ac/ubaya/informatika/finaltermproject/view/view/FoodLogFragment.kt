@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +12,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.finaltermproject.R
 import id.ac.ubaya.informatika.finaltermproject.databinding.FoodLogItemListBinding
+import id.ac.ubaya.informatika.finaltermproject.databinding.FragmentFoodLogBinding
+import id.ac.ubaya.informatika.finaltermproject.databinding.FragmentProfileBinding
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListFoodLogViewModel
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListUserViewModel
 import kotlinx.android.synthetic.main.fragment_food_log.*
@@ -19,8 +22,9 @@ import kotlinx.android.synthetic.main.fragment_log_a_meal.view.*
 import kotlin.math.roundToInt
 
 
-class FoodLogFragment : Fragment() {
+class FoodLogFragment : Fragment(),FabListener {
 
+    private lateinit var databinding: FragmentFoodLogBinding
     private lateinit var viewModel: ListFoodLogViewModel
     private lateinit var viewModelUser: ListUserViewModel
     private val foodLogAdapter = FoodLogAdapter(arrayListOf(), arrayListOf())
@@ -31,7 +35,8 @@ class FoodLogFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food_log, container, false)
+        databinding = DataBindingUtil.inflate<FragmentFoodLogBinding>(inflater, R.layout.fragment_food_log, container, false)
+        return databinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,13 +53,18 @@ class FoodLogFragment : Fragment() {
 
         textViewCal.text = "0 Cal"
 
-        fabButton.setOnClickListener {
-            val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment()
-            Navigation.findNavController(it).navigate(action)
-        }
+        databinding.listener = this
 
         observeViewModel()
         observeViewModelUser()
+
+        if (textViewGender.text.toString() == "1"){
+            textViewGender.text = "Male"
+        } else
+        {
+            textViewGender.text = "Female"
+        }
+
     }
 
     fun observeViewModel() {
@@ -107,6 +117,12 @@ class FoodLogFragment : Fragment() {
                     textViewCal2.text = calories.roundToInt().toString() + " Cal"
                 }
             })
+    }
+
+    override fun onFabListener(v: View) {
+
+        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment()
+        Navigation.findNavController(v).navigate(action)
     }
 
 }
