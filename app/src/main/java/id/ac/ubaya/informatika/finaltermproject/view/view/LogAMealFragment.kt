@@ -37,6 +37,10 @@ class LogAMealFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModelUser = ViewModelProvider(this).get(ListUserViewModel::class.java)
         viewModelUser.refresh()
+
+        viewModel = ViewModelProvider(this).get(ListFoodLogViewModel::class.java)
+        viewModel.refresh()
+
         btnLogThisMeal.setOnClickListener {
             val sdf = SimpleDateFormat("yyyy.MM.dd")
             var model = FoodLog(

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.view.LogAMealFragment">
+    tools:context=".view.view.LogAMealFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">`
 
         <TextView
             android:id="@+id/txtDate"
@@ -77,7 +78,9 @@
                         android:id="@+id/txtCalorieApprox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Calorie Approx" />
+                        android:hint="Calorie Approx"
+
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -96,7 +99,8 @@
                         android:id="@+id/txtWhatYouEat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="What You Eat?" />
+                        android:hint="What You Eat?"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
