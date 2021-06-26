@@ -25,6 +25,8 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 class WelcomeFragment : Fragment(),StartJourneyClick{
     private lateinit var viewModel:ListUserViewModel
     private lateinit var databinding:FragmentWelcomeBinding
+    var radio1 : Int = 0
+    var radio2 : Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -53,10 +55,29 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
     }
 
     override fun onStartJourneyClick(view: View) {
-        val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-        val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
+        if(radioButtonGainWeight.isChecked)
+        {
+            radio1 = 2
+        }
+        else if(radioButtonLossWeight.isChecked)
+        {
+            radio1 = 3
+        }
+        else
+        {
+            radio1 = 1
+        }
 
-        var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radioGender.tag.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio.tag.toString().toInt())
+        if(radioMale.isChecked)
+        {
+            radio2 = 1
+        }
+        else
+        {
+            radio2 = 2
+        }
+
+        var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt())
         val list = listOf(model)
         viewModel.insertUser(list)
         Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
