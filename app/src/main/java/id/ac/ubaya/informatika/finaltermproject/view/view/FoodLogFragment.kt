@@ -91,8 +91,9 @@ class FoodLogFragment : Fragment(),FabListener {
                     }
                     textViewCal.text = currCalories.toString()
                 }
+                status()
             })
-        status()
+
     }
 
     fun observeViewModelUser() {
@@ -110,24 +111,6 @@ class FoodLogFragment : Fragment(),FabListener {
                     {
                         textViewGender.text = "Female"
                     }
-                    textViewAge.setText((it[0].age.toString()))
-                    textViewName.setText((it[0].name.toString()))
-
-                    var calories: Double
-                    if (it[0].gender.toString() == "Male") {
-                        calories =
-                            13.397 * it[0].weight!!.toDouble() + 4.799 * it[0].height!!.toDouble() - 5.677 * it[0].age!!.toDouble() + 88.362
-                    } else {
-                        calories =
-                            9.247 * it[0].weight!!.toDouble() + 3.098 * it[0].height!!.toDouble() - 4.330 * it[0].age!!.toDouble() + 447.593
-                    }
-
-                    if (it[0].personalGoal == 2) {
-                        calories += (calories * 15 / 100)
-                    } else if (it[0].personalGoal == 3) {
-                        calories -= (calories * 15 / 100)
-                    }
-                    textViewCal2.text = calories.roundToInt().toString()
                 }
             })
     }
