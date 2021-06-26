@@ -40,37 +40,43 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
         databinding.listener = this
     }
 
-     fun onStartJourneyClick(view: View) {
-        if(radioButtonGainWeight.isChecked)
-        {
-            radio1 = 2
-        }
-        else if(radioButtonLossWeight.isChecked)
-        {
-            radio1 = 3
-        }
-        else
-        {
-            radio1 = 1
-        }
+     override fun onStartJourneyClick(view: View) {
 
-        if(radioMale.isChecked)
-        {
-            radio2 = 1
-        }
-        else
-        {
-            radio2 = 2
-        }
+         if (textInputName.text.toString() == "" || textInputAge.text.toString() == "" || textInputWeight.text.toString() == "" || textInputHeight.text.toString() == ""){
+             Toast.makeText(view.context, "Please fill the text box ", Toast.LENGTH_LONG).show()
+         } else {
+             if(radioButtonGainWeight.isChecked)
+             {
+                 radio1 = 2
+             }
+             else if(radioButtonLossWeight.isChecked)
+             {
+                 radio1 = 3
+             }
+             else
+             {
+                 radio1 = 1
+             }
+
+             if(radioMale.isChecked)
+             {
+                 radio2 = 1
+             }
+             else
+             {
+                 radio2 = 2
+             }
+
+             var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt())
+             val list = listOf(model)
+             viewModel.insertUser(list)
+             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
+
+             val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
+             Navigation.findNavController(view).navigate(action)
+         }
 
 
-        var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt())
-        val list = listOf(model)
-        viewModel.insertUser(list)
-        Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
-
-        val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
-        Navigation.findNavController(view).navigate(action)
     }
 
 
