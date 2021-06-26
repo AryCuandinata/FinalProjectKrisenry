@@ -17,8 +17,6 @@ interface RadioClickGender {
     fun onRadioClickGender(v: View, gender: Int, obj: User)
 }
 
-
-
 interface ProfileSaveChangesClick {
     fun onProfileSaveChangesClick(v: View, obj: User)
 }
