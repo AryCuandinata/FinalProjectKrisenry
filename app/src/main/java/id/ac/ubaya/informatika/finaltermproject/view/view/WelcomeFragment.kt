@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class WelcomeFragment : Fragment(){
+class WelcomeFragment : Fragment(),StartJourneyClick{
     private lateinit var viewModel:ListUserViewModel
     private lateinit var databinding:FragmentWelcomeBinding
     var radio1 : Int = 0
@@ -37,53 +37,46 @@ class WelcomeFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(ListUserViewModel::class.java)
-//        databinding.listener = this
-
-        buttonStart.setOnClickListener {
-            val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-            val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
-
-            var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radioGender.tag.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio.tag.toString().toInt())
-            val list = listOf(model)
-            viewModel.insertUser(list)
-            Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
-
-            val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
-            Navigation.findNavController(view).navigate(action)
-        }
-
+        databinding.listener = this
     }
 
-     fun onStartJourneyClick(view: View) {
-        if(radioButtonGainWeight.isChecked)
-        {
-            radio1 = 2
-        }
-        else if(radioButtonLossWeight.isChecked)
-        {
-            radio1 = 3
-        }
-        else
-        {
-            radio1 = 1
-        }
+     override fun onStartJourneyClick(view: View) {
 
-        if(radioMale.isChecked)
-        {
-            radio2 = 1
-        }
-        else
-        {
-            radio2 = 2
-        }
+         if (textInputName.text.toString() == "" || textInputAge.text.toString() == "" || textInputWeight.text.toString() == "" || textInputHeight.text.toString() == ""){
+             Toast.makeText(view.context, "Please fill the text box ", Toast.LENGTH_LONG).show()
+         } else {
+             if(radioButtonGainWeight.isChecked)
+             {
+                 radio1 = 2
+             }
+             else if(radioButtonLossWeight.isChecked)
+             {
+                 radio1 = 3
+             }
+             else
+             {
+                 radio1 = 1
+             }
 
-        var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt())
-        val list = listOf(model)
-        viewModel.insertUser(list)
-        Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
+             if(radioMale.isChecked)
+             {
+                 radio2 = 1
+             }
+             else
+             {
+                 radio2 = 2
+             }
 
-        val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
-        Navigation.findNavController(view).navigate(action)
+             var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt())
+             val list = listOf(model)
+             viewModel.insertUser(list)
+             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
+
+             val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
+             Navigation.findNavController(view).navigate(action)
+         }
+
+
     }
 
 

@@ -42,6 +42,18 @@ class ListFoodLogViewModel(application: Application):AndroidViewModel(applicatio
         }
     }
 
+    fun refresh(date:String) {
+        foodLoadErrorLD.value = false
+        loadingLD.value = false
+        launch {
+            val db = Room.databaseBuilder(
+                    getApplication(), FoodLogDatabase::class.java, "newfoodlogdb"
+            ).build()
+
+            foodLD.value = db.foodLogDao().selectAllFoodLog(date)
+        }
+    }
+
     fun clearTask(foodLog: FoodLog) {
         launch {
             val db = Room.databaseBuilder(
