@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="user"
+            type="id.ac.ubaya.informatika.finaltermproject.view.model.User" />
+        <variable
+            name="radioListener"
+            type="id.ac.ubaya.informatika.finaltermproject.view.view.RadioClick" />
+        <variable
+            name="radioListenerGender"
+            type="id.ac.ubaya.informatika.finaltermproject.view.view.RadioClickGender" />
+        <variable
+            name="listener"
+            type="id.ac.ubaya.informatika.finaltermproject.view.view.StartJourneyClick" />
+    </data>
+
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.view.WelcomeFragment">
@@ -20,6 +36,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="Start The Journey"
+            android:onClick="@{(view)->listener.onStartJourneyClick(view)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
@@ -58,8 +75,8 @@
                 android:id="@+id/radioButtonMaintain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:tag="1"
+
                 android:text="Maintain Weight" />
 
             <RadioButton
@@ -91,7 +108,8 @@
                 android:id="@+id/textInputWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Weight" />
+                android:hint="Weight"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -107,7 +125,8 @@
                 android:id="@+id/textInputHeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Height" />
+                android:hint="Height"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -124,7 +143,8 @@
                 android:id="@+id/textInputAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Age" />
+                android:hint="Age"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -155,7 +175,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name" />
+                android:hint="Name"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
@@ -170,8 +191,8 @@
                 android:id="@+id/radioMale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:tag="1"
+
                 android:text="Male" />
 
             <RadioButton
@@ -179,8 +200,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:tag="2"
+
                 android:text="Female" />
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
+
+</layout>
