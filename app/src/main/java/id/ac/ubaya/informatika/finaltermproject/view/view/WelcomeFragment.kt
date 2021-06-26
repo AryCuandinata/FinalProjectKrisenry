@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class WelcomeFragment : Fragment(),StartJourneyClick{
+class WelcomeFragment : Fragment(){
     private lateinit var viewModel:ListUserViewModel
     private lateinit var databinding:FragmentWelcomeBinding
 
@@ -35,8 +35,8 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(ListUserViewModel::class.java)
-        databinding.listener = this
-        /*
+//        databinding.listener = this
+
         buttonStart.setOnClickListener {
             val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
             val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
@@ -48,22 +48,22 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
 
             val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
             Navigation.findNavController(view).navigate(action)
-        }*/
+        }
 
     }
 
-    override fun onStartJourneyClick(view: View) {
-        val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
-        val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
-
-        var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radioGender.tag.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio.tag.toString().toInt())
-        val list = listOf(model)
-        viewModel.insertUser(list)
-        Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
-
-        val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
-        Navigation.findNavController(view).navigate(action)
-    }
+//    override fun onStartJourneyClick(view: View) {
+//        val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+//        val radioGender = view.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
+//
+//        var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radioGender.tag.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio.tag.toString().toInt())
+//        val list = listOf(model)
+//        viewModel.insertUser(list)
+//        Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
+//
+//        val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
+//        Navigation.findNavController(view).navigate(action)
+//    }
 
 
 

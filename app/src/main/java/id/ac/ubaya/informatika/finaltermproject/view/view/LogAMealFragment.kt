@@ -11,10 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import id.ac.ubaya.informatika.finaltermproject.R
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
+import id.ac.ubaya.informatika.finaltermproject.view.model.Report
 import id.ac.ubaya.informatika.finaltermproject.view.model.User
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListFoodLogViewModel
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListReportViewModel
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListUserViewModel
+import kotlinx.android.synthetic.main.fragment_food_log.*
 import kotlinx.android.synthetic.main.fragment_log_a_meal.*
 import kotlinx.android.synthetic.main.fragment_log_a_meal.txtDate
 import kotlinx.android.synthetic.main.fragment_report.*
@@ -22,12 +24,13 @@ import java.sql.Date
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.math.roundToInt
 
 class LogAMealFragment : Fragment() {
     private lateinit var viewModel: ListFoodLogViewModel
     private lateinit var viewModelUser: ListUserViewModel
     private lateinit var viewModelReport: ListReportViewModel
-    var listUser: ArrayList<User> = ArrayList()
+    var listReport: ArrayList<Report> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,17 +46,33 @@ class LogAMealFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ListFoodLogViewModel::class.java)
         viewModel.refresh()
 
-        viewModel
+        viewModelReport = ViewModelProvider(this).get(ListReportViewModel::class.java)
+        viewModelReport.refresh()
 
         btnLogThisMeal.setOnClickListener {
-            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            val date = LocalDateTime.now()
+            val format = DateTimeFormatter.ofPattern("dd-mm-yyyy")
+            val currentDate = date.format(format)
             var model = FoodLog(
                 txtWhatYouEat.text.toString(),
                 txtCalorieApprox.text.toString().toInt(),
-                sdf.toString()
+                currentDate.toString()
             )
-            val list = listOf(model)
-            viewModel.logAMeal(list)
+            val listFoodLog = listOf(model)
+            viewModel.logAMeal(listFoodLog)
+
+            var model2 = Report(currentDate, txtCalorieApprox.text.toString().toInt())
+            for (i in listReport)
+                if(i.date.toString()==currentDate) {
+                    var newCalories: Int =
+                        i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
+                    viewModelReport.update(currentDate, newCalories)
+                }
+            else {
+                    val nListReport = listOf(model2)
+                    viewModelReport.insertReport(nListReport)
+                }
+
             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
             Navigation.findNavController(it).popBackStack()
         }
@@ -61,13 +80,18 @@ class LogAMealFragment : Fragment() {
         val format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
         val currentDate = date.format(format)
         txtDate.text = currentDate
+
+        observeViewModelReport()
     }
 
-
-    fun updateTodoListUser(newTodoListUser: List<User>) {
-        listUser.clear()
-        listUser.addAll(newTodoListUser)
+    fun observeViewModelReport() {
+        viewModelReport.reportLD.observe(
+            viewLifecycleOwner, Observer {
+                updateReportList(it)
+    })
     }
-
-
+    fun updateReportList(newReportList: List<Report>) {
+        listReport.clear()
+        listReport.addAll(newReportList)
+    }
 }
