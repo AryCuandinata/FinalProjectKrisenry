@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.Room
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLogDatabase
 import id.ac.ubaya.informatika.finaltermproject.view.model.Report
+import id.ac.ubaya.informatika.finaltermproject.view.model.User
+import id.ac.ubaya.informatika.finaltermproject.view.util.buildDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -29,6 +31,20 @@ class ListReportViewModel(application: Application):AndroidViewModel(application
                 getApplication(),FoodLogDatabase::class.java, "newfoodlogdb"
             ).build()
             reportLD.value=db.reportDao().selectAllReport()
+        }
+    }
+
+    fun insertReport(list: List<Report>){
+        launch {
+            val db = buildDb(getApplication())
+            db.reportDao().insertAll(*list.toTypedArray())
+        }
+    }
+
+    fun update(date:String, calories:Int) {
+        launch {
+            val db = buildDb(getApplication())
+            db.reportDao().update(date, calories)
         }
     }
 }
