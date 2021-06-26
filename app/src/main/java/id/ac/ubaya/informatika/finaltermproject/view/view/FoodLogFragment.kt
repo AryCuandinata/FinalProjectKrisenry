@@ -57,14 +57,6 @@ class FoodLogFragment : Fragment(),FabListener {
 
         observeViewModel()
         observeViewModelUser()
-
-        if (textViewGender.text.toString() == "1"){
-            textViewGender.text = "Male"
-        } else
-        {
-            textViewGender.text = "Female"
-        }
-
     }
 
     fun observeViewModel() {
@@ -96,7 +88,13 @@ class FoodLogFragment : Fragment(),FabListener {
                     val action = FoodLogFragmentDirections.actionItemFoodLogToWelcomeFragment()
                     Navigation.findNavController(requireView()).navigate(action)
                 } else {
-                    textViewGender.setText((it[0].gender.toString()))
+
+                    if (it[0].gender.toString() == "1"){
+                        textViewGender.text = "Male"
+                    } else
+                    {
+                        textViewGender.text = "Female"
+                    }
                     textViewAge.setText((it[0].age.toString()))
                     textViewName.setText((it[0].name.toString()))
 
