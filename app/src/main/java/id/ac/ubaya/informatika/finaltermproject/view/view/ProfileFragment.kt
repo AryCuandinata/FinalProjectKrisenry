@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_profile.textInputAge
 import kotlinx.android.synthetic.main.fragment_profile.textInputHeight
 import kotlinx.android.synthetic.main.fragment_profile.textInputName
 import kotlinx.android.synthetic.main.fragment_profile.textInputWeight
+import kotlinx.android.synthetic.main.fragment_welcome.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,8 +64,19 @@ class ProfileFragment : Fragment(), ProfileSaveChangesClick,RadioClick{
         if(textInputAge.text.toString() == "" || textInputName.text.toString() == "" || textInputWeight.text.toString() == "" || textInputHeight.text.toString() == ""){
             Toast.makeText(v.context, "Cannot Update Profile", Toast.LENGTH_SHORT).show()
         } else {
+            var calories:Double
+            if(obj.gender.toString().toInt() == 1)
+            {
+                calories =
+                    13.397 * obj.weight.toString().toDouble() + 4.799 * obj.height.toString().toDouble() - 5.677 * obj.age.toString().toDouble() + 88.362
+            }
+            else
+            {
+                calories =
+                    9.247 * obj.weight.toString().toDouble() + obj.height.toString().toDouble() - 4.330 * obj.age.toString().toDouble() + 447.593
+            }
             viewModel.update(obj.name.toString(), obj.age.toString().toInt(), obj.gender.toString().toInt(), obj.weight.toString().toInt(),
-                    obj.height.toString().toInt() , obj.uuid)
+                    obj.height.toString().toInt() , calories.toInt(), obj.uuid)
             Toast.makeText(v.context, "Profile Updated", Toast.LENGTH_SHORT).show()
         }
     }

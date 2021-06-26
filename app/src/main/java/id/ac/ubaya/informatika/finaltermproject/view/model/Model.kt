@@ -18,7 +18,9 @@ data class User(
     @ColumnInfo(name="height")
     var height:Int?,
     @ColumnInfo(name="personalGoal")
-    var personalGoal:Int?
+    var personalGoal:Int?,
+    @ColumnInfo(name="bmr")
+    var bmr:Int?
 )
 {
     @PrimaryKey(autoGenerate = true)

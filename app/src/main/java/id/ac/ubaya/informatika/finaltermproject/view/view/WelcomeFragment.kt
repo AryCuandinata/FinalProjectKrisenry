@@ -45,29 +45,35 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
          if (textInputName.text.toString() == "" || textInputAge.text.toString() == "" || textInputWeight.text.toString() == "" || textInputHeight.text.toString() == ""){
              Toast.makeText(view.context, "Please fill the text box ", Toast.LENGTH_LONG).show()
          } else {
+             var calories: Double
+             if(radioMale.isChecked)
+             {
+                 radio2 = 1
+                 calories =
+                     13.397 * textInputWeight.text.toString().toDouble() + 4.799 * textInputHeight.text.toString().toDouble() - 5.677 * textInputAge.text.toString().toDouble() + 88.362
+             }
+             else
+             {
+                 radio2 = 2
+                 calories =
+                     9.247 * textInputWeight.text.toString().toDouble() + textInputHeight.text.toString().toDouble() - 4.330 * textInputAge.text.toString().toDouble() + 447.593
+             }
              if(radioButtonGainWeight.isChecked)
              {
                  radio1 = 2
+                 calories += (calories * 15 / 100)
              }
              else if(radioButtonLossWeight.isChecked)
              {
                  radio1 = 3
+                 calories -= (calories * 15 / 100)
              }
              else
              {
                  radio1 = 1
              }
 
-             if(radioMale.isChecked)
-             {
-                 radio2 = 1
-             }
-             else
-             {
-                 radio2 = 2
-             }
-
-             var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt())
+             var model = User(textInputName.text.toString(), textInputAge.text.toString().toInt(), radio2.toString().toInt(), textInputWeight.text.toString().toInt(), textInputHeight.text.toString().toInt(), radio1.toString().toInt(), calories.toInt())
              val list = listOf(model)
              viewModel.insertUser(list)
              Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
