@@ -1,6 +1,7 @@
 package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class FoodLogFragment : Fragment(),FabListener {
     private val foodLogAdapter = FoodLogAdapter(arrayListOf(), arrayListOf())
 
     var value = false
+    var currCalories = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +44,8 @@ class FoodLogFragment : Fragment(),FabListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        textViewCal.text = "0"
+        textViewCal2.text = "0"
         viewModelUser = ViewModelProvider(this).get(ListUserViewModel::class.java)
         viewModelUser.refresh()
 
@@ -51,12 +55,25 @@ class FoodLogFragment : Fragment(),FabListener {
         recViewFoodLog.layoutManager = LinearLayoutManager(context)
         recViewFoodLog.adapter = foodLogAdapter
 
-        textViewCal.text = "0 Cal"
-
         databinding.listener = this
 
         observeViewModel()
         observeViewModelUser()
+    }
+
+    fun status(){
+        val calories = (textViewCal.text.toString().toDouble() + textViewCal2.text.toString().toDouble()) * 100
+        if(calories < 50)
+        {
+            textViewStatus.text = "Low"
+        }
+        else if(calories>100)
+        {
+            textViewStatus.text = "Exceed"
+        }
+        else{
+            textViewStatus.text = "Normal"
+        }
     }
 
     fun observeViewModel() {
@@ -68,16 +85,18 @@ class FoodLogFragment : Fragment(),FabListener {
 
                 } else {
                     txtError.visibility = View.GONE
-
-                    var currCalories = 0
+                    currCalories = 0
                     for (i in it) {
+                        Log.d("test", i.toString())
                         var index = 0
-                        currCalories += it[index].calories!!.toInt()
+                        Log.d("test", it[index].calories!!.toInt().toString())
+                        currCalories += i.calories!!.toInt()
                         index++
                     }
-                    textViewCal.text = currCalories.toString() + " Cal"
+                    textViewCal.text = currCalories.toString()
                 }
             })
+        status()
     }
 
     fun observeViewModelUser() {
@@ -112,7 +131,7 @@ class FoodLogFragment : Fragment(),FabListener {
                     } else if (it[0].personalGoal == 3) {
                         calories -= (calories * 15 / 100)
                     }
-                    textViewCal2.text = calories.roundToInt().toString() + " Cal"
+                    textViewCal2.text = calories.roundToInt().toString()
                 }
             })
     }

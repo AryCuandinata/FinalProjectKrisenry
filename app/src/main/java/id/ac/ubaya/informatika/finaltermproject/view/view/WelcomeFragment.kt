@@ -54,7 +54,7 @@ class WelcomeFragment : Fragment(){
 
     }
 
-    override fun onStartJourneyClick(view: View) {
+     fun onStartJourneyClick(view: View) {
         if(radioButtonGainWeight.isChecked)
         {
             radio1 = 2
