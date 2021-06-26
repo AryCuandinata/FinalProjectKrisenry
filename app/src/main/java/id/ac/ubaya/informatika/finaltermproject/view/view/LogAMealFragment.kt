@@ -51,7 +51,7 @@ class LogAMealFragment : Fragment() {
 
         btnLogThisMeal.setOnClickListener {
             val date = LocalDateTime.now()
-            val format = DateTimeFormatter.ofPattern("dd-mm-yyyy")
+            val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
             val currentDate = date.format(format)
             var model = FoodLog(
                 txtWhatYouEat.text.toString(),

@@ -11,6 +11,9 @@ interface FoodLogDao {
     @Query("SELECT * FROM foodlog")
     suspend fun selectAllFoodLog(): List<FoodLog>
 
+    @Query("SELECT * FROM foodlog WHERE date=:date")
+    suspend fun selectAllFoodLog(date:String): List<FoodLog>
+
     @Delete
     suspend fun deleteFoodLog(foodLog: FoodLog)
 }

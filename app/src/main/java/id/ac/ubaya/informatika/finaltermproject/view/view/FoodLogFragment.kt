@@ -1,7 +1,6 @@
 package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.ac.ubaya.informatika.finaltermproject.R
-import id.ac.ubaya.informatika.finaltermproject.databinding.FoodLogItemListBinding
 import id.ac.ubaya.informatika.finaltermproject.databinding.FragmentFoodLogBinding
-import id.ac.ubaya.informatika.finaltermproject.databinding.FragmentProfileBinding
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListFoodLogViewModel
 import id.ac.ubaya.informatika.finaltermproject.view.viewmodel.ListUserViewModel
 import kotlinx.android.synthetic.main.fragment_food_log.*
-import kotlinx.android.synthetic.main.fragment_food_log.view.*
-import kotlinx.android.synthetic.main.fragment_log_a_meal.view.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 
@@ -43,14 +40,16 @@ class FoodLogFragment : Fragment(),FabListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val date = LocalDateTime.now()
+        val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val currentDate = date.format(format)
         textViewCal.text = "0"
         textViewCal2.text = "0"
         viewModelUser = ViewModelProvider(this).get(ListUserViewModel::class.java)
         viewModelUser.refresh()
 
         viewModel = ViewModelProvider(this).get(ListFoodLogViewModel::class.java)
-        viewModel.refresh()
+        viewModel.refresh(currentDate)
 
         recViewFoodLog.layoutManager = LinearLayoutManager(context)
         recViewFoodLog.adapter = foodLogAdapter
@@ -79,17 +78,14 @@ class FoodLogFragment : Fragment(),FabListener {
     fun observeViewModel() {
         viewModel.foodLD.observe(
             viewLifecycleOwner, Observer {
-                foodLogAdapter.updateTodoList(it)
+                foodLogAdapter.updateFoodLogList(it)
                 if (it.isEmpty()) {
                     txtError.visibility = View.VISIBLE
-
                 } else {
                     txtError.visibility = View.GONE
                     currCalories = 0
                     for (i in it) {
-                        Log.d("test", i.toString())
                         var index = 0
-                        Log.d("test", it[index].calories!!.toInt().toString())
                         currCalories += i.calories!!.toInt()
                         index++
                     }
@@ -102,7 +98,7 @@ class FoodLogFragment : Fragment(),FabListener {
     fun observeViewModelUser() {
         viewModelUser.userLD.observe(
             viewLifecycleOwner, Observer {
-                foodLogAdapter.updateTodoListUser(it)
+                foodLogAdapter.updateFoodLogListUser(it)
                 if (it.isEmpty()) {
                     val action = FoodLogFragmentDirections.actionItemFoodLogToWelcomeFragment()
                     Navigation.findNavController(requireView()).navigate(action)
