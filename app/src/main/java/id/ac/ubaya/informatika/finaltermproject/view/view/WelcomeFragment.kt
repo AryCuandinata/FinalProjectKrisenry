@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class WelcomeFragment : Fragment(),StartJourneyClick{
+class WelcomeFragment : Fragment(){
     private lateinit var viewModel:ListUserViewModel
     private lateinit var databinding:FragmentWelcomeBinding
 
@@ -35,7 +35,6 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProvider(this).get(ListUserViewModel::class.java)
-        databinding.listener = this
 
         buttonStart.setOnClickListener {
             val radio = view.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
@@ -52,6 +51,7 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
 
     }
 
+    /*
     override fun onStartJourneyClick(v: View) {
         val radio = v.findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
         val radioGender = v.findViewById<RadioButton>(radioGroupGenderWellcome.checkedRadioButtonId)
@@ -63,5 +63,5 @@ class WelcomeFragment : Fragment(),StartJourneyClick{
         val action = WelcomeFragmentDirections.actionWelcomeFragmentToItemFoodLog2()
         Navigation.findNavController(v).navigate(action)
     }
-
+*/
 }
