@@ -36,6 +36,11 @@ class LogAMealFragment : Fragment(),LogAMealClick {
     private lateinit var viewModelReport: ListReportViewModel
 
     private lateinit var databinding: FragmentLogAMealBinding
+
+    var bmr = 0
+    var currentCalories = 0
+    var neededCalories = 0
+
     var listReport: ArrayList<Report> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +62,19 @@ class LogAMealFragment : Fragment(),LogAMealClick {
         viewModelReport.refresh()
 
         databinding.listenerr = this
+
+        bmr = LogAMealFragmentArgs.fromBundle(requireArguments()).bmr
+        currentCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).currentCalories
+        neededCalories = bmr - currentCalories
+
+        if (neededCalories < 0) {
+            txtCal.text = "0 Cal needed for today"
+        } else{
+            txtCal.text = neededCalories.toString() + " Cal needed for today "
+        }
+
+        Log.d("bmr",bmr.toString())
+        Log.d("CDE",currentCalories.toString())
 
         val date = LocalDateTime.now()
         val format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
@@ -83,12 +101,6 @@ class LogAMealFragment : Fragment(),LogAMealClick {
             Toast.makeText(v.context, "Please fill the text box", Toast.LENGTH_LONG).show()
         } else {
 
-            var bmr = LogAMealFragmentArgs.fromBundle(requireArguments()).bmr
-            var currentCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).currentCalories
-            var neededCalories = currentCalories - bmr
-            if (neededCalories < 0) neededCalories = 0
-            txtCal.text = neededCalories.toString() + " Cal needed for today"
-
 
             val date = LocalDateTime.now()
             val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
@@ -104,6 +116,10 @@ class LogAMealFragment : Fragment(),LogAMealClick {
             var status = "Low"
             val calories = ((currentCalories.toDouble() + txtCalorieApprox.text.toString()
                     .toDouble()) / bmr.toDouble()) * 100
+
+
+            Log.d("approx",txtCalorieApprox.text.toString())
+
             if (calories < 50) {
                 status = "Low"
             } else if (calories > 100) {
@@ -113,7 +129,7 @@ class LogAMealFragment : Fragment(),LogAMealClick {
             }
 
             var mealCount = 1
-
+            var check = 0
             var model2 =
                     Report(currentDate, txtCalorieApprox.text.toString().toInt(), status, mealCount)
             if (listReport.count() != 0) {
@@ -123,15 +139,20 @@ class LogAMealFragment : Fragment(),LogAMealClick {
                         var newCalories: Int =
                                 i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
                         viewModelReport.update(currentDate, newCalories, status, mealCount)
-                    } else {
-                        val nListReport = listOf(model2)
-                        viewModelReport.insertReport(nListReport)
+                        check = 1
+                        break
                     }
+                }
+
+                if (check == 0){
+                    val nListReport = listOf(model2)
+                    viewModelReport.insertReport(nListReport)
                 }
             } else {
                 val nListReport = listOf(model2)
                 viewModelReport.insertReport(nListReport)
             }
+
 
 
             Toast.makeText(v.context, "Data added", Toast.LENGTH_LONG).show()

@@ -113,13 +113,13 @@ class FoodLogFragment : Fragment(),FabListener {
                     Log.d("bmr",bmr.toString())
                     textViewCal2.text = it.bmr.toString()
                 }
-
         })
     }
 
     override fun onFabListener(v: View) {
-        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment(bmr-currCalories, currCalories)
+        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment(currCalories, bmr)
         Navigation.findNavController(v).navigate(action)
+        Log.d("currentss",currCalories.toString())
     }
 
 }

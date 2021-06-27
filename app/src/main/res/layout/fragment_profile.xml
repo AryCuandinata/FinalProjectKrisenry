@@ -87,10 +87,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputName"
+                    android:text="@={profile.name}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
-                    android:text="@={profile.name}" />
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,10 +106,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputAge"
+                    android:text="@={`` + profile.age}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Age"
-                    android:text="@{profile.age.toString()}" />
+                         />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -123,11 +125,12 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputWeight"
+                    android:text="@={`` + profile.weight}"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Weight"
-                    android:text="@{profile.weight.toString()}" />
+              />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -142,10 +145,11 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputHeight"
+                    android:text="@={`` + profile.height}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Height"
-                    android:text="@{profile.height.toString()}" />
+                  />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
