@@ -48,6 +48,5 @@ class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>, val userList: ArrayLis
         holder.view.txtName.setText(foodLogList[position].meal.toString())
         holder.view.txtCalories.setText(foodLogList[position].calories.toString())
         */
-
     }
 }

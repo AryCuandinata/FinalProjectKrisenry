@@ -21,8 +21,6 @@ interface ProfileSaveChangesClick {
     fun onProfileSaveChangesClick(v: View, obj: User)
 }
 
-
-
 interface FabListener {
     fun onFabListener(v: View)
 }
@@ -30,3 +28,4 @@ interface FabListener {
 interface StartJourneyClick {
     fun onStartJourneyClick(v: View)
 }
+
