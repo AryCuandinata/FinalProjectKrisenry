@@ -83,10 +83,7 @@ class FoodLogFragment : Fragment(),FabListener {
     }
 
     fun status(){
-        Log.d("current",currCalories.toString())
-        Log.d("bmr",bmr.toString())
         val calories = (currCalories.toDouble()/bmr.toDouble()) * 100
-        Log.d("calories",calories.toString())
         if(calories < 50)
         {
             textViewStatus.text = "Low"
@@ -118,7 +115,7 @@ class FoodLogFragment : Fragment(),FabListener {
     }
 
     override fun onFabListener(v: View) {
-        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment(bmr-currCalories)
+        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment(bmr-currCalories, currCalories)
         Navigation.findNavController(v).navigate(action)
     }
 

@@ -41,10 +41,10 @@ class ListReportViewModel(application: Application):AndroidViewModel(application
         }
     }
 
-    fun update(date:String, calories:Int) {
+    fun update(date:String, calories:Int, status:String) {
         launch {
             val db = buildDb(getApplication())
-            db.reportDao().update(date, calories)
+            db.reportDao().update(date, calories, status)
         }
     }
 }

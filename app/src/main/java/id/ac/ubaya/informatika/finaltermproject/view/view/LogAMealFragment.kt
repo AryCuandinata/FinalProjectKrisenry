@@ -50,9 +50,13 @@ class LogAMealFragment : Fragment() {
         viewModelReport = ViewModelProvider(this).get(ListReportViewModel::class.java)
         viewModelReport.refresh()
 
-        var neededCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).neededCalories
-        if(neededCalories < 0) neededCalories = 0
+        var bmr = LogAMealFragmentArgs.fromBundle(requireArguments()).bmr
+        var currentCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).currentCalories
+        var neededCalories = currentCalories - bmr
+        if (neededCalories < 0) neededCalories = 0
         txtCal.text = neededCalories.toString() + " Cal needed for today"
+
+
 
         btnLogThisMeal.setOnClickListener {
             val date = LocalDateTime.now()
@@ -66,30 +70,31 @@ class LogAMealFragment : Fragment() {
             val listFoodLog = listOf(model)
             viewModel.logAMeal(listFoodLog)
 
-            var model2 = Report(currentDate, txtCalorieApprox.text.toString().toInt())
-            Log.d("aaaa", 1.toString())
-            if (listReport.count() != 0 )
-            {
-                Log.d("aaaa", 1.toString())
+            var status = "Low"
+            val calories = ((currentCalories.toDouble() + txtCalorieApprox.text.toString()
+                .toDouble()) / bmr.toDouble()) * 100
+            if (calories < 50) {
+                status = "Low"
+            } else if (calories > 100) {
+                status = "Exceed"
+            } else {
+                status = "Normal"
+            }
+
+            var model2 = Report(currentDate, txtCalorieApprox.text.toString().toInt(), status)
+            if (listReport.count() != 0) {
                 for (i in listReport) {
-                    Log.d("aaaa", 1.toString())
                     if (i.date.toString() == currentDate) {
-                        Log.d("aaaa", 1.toString())
                         var newCalories: Int =
-                                i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
-                        Log.d("aaaa", 1.toString())
-                        viewModelReport.update(currentDate, newCalories)
+                            i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
+                        viewModelReport.update(currentDate, newCalories, status)
                     } else {
                         val nListReport = listOf(model2)
-                        Log.d("aaaa", 0.toString())
                         viewModelReport.insertReport(nListReport)
                     }
                 }
-            }
-            else
-            {
+            } else {
                 val nListReport = listOf(model2)
-                Log.d("aaaa", 0.toString())
                 viewModelReport.insertReport(nListReport)
             }
 
@@ -109,8 +114,9 @@ class LogAMealFragment : Fragment() {
         viewModelReport.reportLD.observe(
             viewLifecycleOwner, Observer {
                 updateReportList(it)
-    })
+            })
     }
+
     fun updateReportList(newReportList: List<Report>) {
         listReport.clear()
         listReport.addAll(newReportList)
