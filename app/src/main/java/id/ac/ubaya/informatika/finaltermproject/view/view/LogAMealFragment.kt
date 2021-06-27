@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import id.ac.ubaya.informatika.finaltermproject.R
+import id.ac.ubaya.informatika.finaltermproject.databinding.FragmentLogAMealBinding
+import id.ac.ubaya.informatika.finaltermproject.databinding.FragmentProfileBinding
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
 import id.ac.ubaya.informatika.finaltermproject.view.model.Report
 import id.ac.ubaya.informatika.finaltermproject.view.model.User
@@ -27,17 +30,20 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
-class LogAMealFragment : Fragment() {
+class LogAMealFragment : Fragment(),LogAMealClick {
     private lateinit var viewModel: ListFoodLogViewModel
     private lateinit var viewModelUser: ListUserViewModel
     private lateinit var viewModelReport: ListReportViewModel
+
+    private lateinit var databinding: FragmentLogAMealBinding
     var listReport: ArrayList<Report> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_log_a_meal, container, false)
+        databinding = DataBindingUtil.inflate<FragmentLogAMealBinding>(inflater, R.layout.fragment_log_a_meal, container, false)
+        return databinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,62 +56,8 @@ class LogAMealFragment : Fragment() {
         viewModelReport = ViewModelProvider(this).get(ListReportViewModel::class.java)
         viewModelReport.refresh()
 
-        var bmr = LogAMealFragmentArgs.fromBundle(requireArguments()).bmr
-        var currentCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).currentCalories
-        var neededCalories = currentCalories - bmr
-        if (neededCalories < 0) neededCalories = 0
-        txtCal.text = neededCalories.toString() + " Cal needed for today"
+        databinding.listenerr = this
 
-
-
-        btnLogThisMeal.setOnClickListener {
-            val date = LocalDateTime.now()
-            val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-            val currentDate = date.format(format)
-            var model = FoodLog(
-                txtWhatYouEat.text.toString(),
-                txtCalorieApprox.text.toString().toInt(),
-                currentDate.toString()
-            )
-            val listFoodLog = listOf(model)
-            viewModel.logAMeal(listFoodLog)
-
-            var status = "Low"
-            val calories = ((currentCalories.toDouble() + txtCalorieApprox.text.toString()
-                .toDouble()) / bmr.toDouble()) * 100
-            if (calories < 50) {
-                status = "Low"
-            } else if (calories > 100) {
-                status = "Exceed"
-            } else {
-                status = "Normal"
-            }
-
-            var mealCount = 1
-
-            var model2 =
-                Report(currentDate, txtCalorieApprox.text.toString().toInt(), status, mealCount)
-            if (listReport.count() != 0) {
-                for (i in listReport) {
-                    if (i.date.toString() == currentDate) {
-                        mealCount = i.meal!!.toInt() + 1
-                        var newCalories: Int =
-                            i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
-                        viewModelReport.update(currentDate, newCalories, status, mealCount)
-                    } else {
-                        val nListReport = listOf(model2)
-                        viewModelReport.insertReport(nListReport)
-                    }
-                }
-            } else {
-                val nListReport = listOf(model2)
-                viewModelReport.insertReport(nListReport)
-            }
-
-
-            Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
-            Navigation.findNavController(it).popBackStack()
-        }
         val date = LocalDateTime.now()
         val format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
         val currentDate = date.format(format)
@@ -124,5 +76,66 @@ class LogAMealFragment : Fragment() {
     fun updateReportList(newReportList: List<Report>) {
         listReport.clear()
         listReport.addAll(newReportList)
+    }
+
+    override fun onLogAmealClick(v: View) {
+        if (txtWhatYouEat.text.toString() == "" || txtCalorieApprox.text.toString() == "" || txtWhatYouEat.text.toString() == "" && txtCalorieApprox.text.toString() == ""){
+            Toast.makeText(v.context, "Please fill the text box", Toast.LENGTH_LONG).show()
+        } else {
+
+            var bmr = LogAMealFragmentArgs.fromBundle(requireArguments()).bmr
+            var currentCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).currentCalories
+            var neededCalories = currentCalories - bmr
+            if (neededCalories < 0) neededCalories = 0
+            txtCal.text = neededCalories.toString() + " Cal needed for today"
+
+
+            val date = LocalDateTime.now()
+            val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+            val currentDate = date.format(format)
+            var model = FoodLog(
+                    txtWhatYouEat.text.toString(),
+                    txtCalorieApprox.text.toString().toInt(),
+                    currentDate.toString()
+            )
+            val listFoodLog = listOf(model)
+            viewModel.logAMeal(listFoodLog)
+
+            var status = "Low"
+            val calories = ((currentCalories.toDouble() + txtCalorieApprox.text.toString()
+                    .toDouble()) / bmr.toDouble()) * 100
+            if (calories < 50) {
+                status = "Low"
+            } else if (calories > 100) {
+                status = "Exceed"
+            } else {
+                status = "Normal"
+            }
+
+            var mealCount = 1
+
+            var model2 =
+                    Report(currentDate, txtCalorieApprox.text.toString().toInt(), status, mealCount)
+            if (listReport.count() != 0) {
+                for (i in listReport) {
+                    if (i.date.toString() == currentDate) {
+                        mealCount = i.meal!!.toInt() + 1
+                        var newCalories: Int =
+                                i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
+                        viewModelReport.update(currentDate, newCalories, status, mealCount)
+                    } else {
+                        val nListReport = listOf(model2)
+                        viewModelReport.insertReport(nListReport)
+                    }
+                }
+            } else {
+                val nListReport = listOf(model2)
+                viewModelReport.insertReport(nListReport)
+            }
+
+
+            Toast.makeText(v.context, "Data added", Toast.LENGTH_LONG).show()
+            Navigation.findNavController(v).popBackStack()
+        }
     }
 }
