@@ -81,13 +81,17 @@ class LogAMealFragment : Fragment() {
                 status = "Normal"
             }
 
-            var model2 = Report(currentDate, txtCalorieApprox.text.toString().toInt(), status)
+            var mealCount = 1
+
+            var model2 =
+                Report(currentDate, txtCalorieApprox.text.toString().toInt(), status, mealCount)
             if (listReport.count() != 0) {
                 for (i in listReport) {
                     if (i.date.toString() == currentDate) {
+                        mealCount = i.meal!!.toInt() + 1
                         var newCalories: Int =
                             i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
-                        viewModelReport.update(currentDate, newCalories, status)
+                        viewModelReport.update(currentDate, newCalories, status, mealCount)
                     } else {
                         val nListReport = listOf(model2)
                         viewModelReport.insertReport(nListReport)

@@ -11,8 +11,8 @@ import androidx.room.*
         @Query("SELECT * FROM report")
         suspend fun selectAllReport(): List<id.ac.ubaya.informatika.finaltermproject.view.model.Report>
 
-        @Query("UPDATE report SET calories=:calories, status=:status WHERE date=:date")
-        suspend fun update(date:String, calories:Int, status:String)
+        @Query("UPDATE report SET calories=:calories, status=:status, meal=:meal WHERE date=:date")
+        suspend fun update(date:String, calories:Int, status:String, meal:Int)
 
         @Delete
         suspend fun deleteReport(report: id.ac.ubaya.informatika.finaltermproject.view.model.Report)
