@@ -38,7 +38,11 @@
         android:label="fragment_log_a_meal"
         tools:layout="@layout/fragment_log_a_meal" >
         <argument
-            android:name="neededCalories"
+            android:name="currentCalories"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="bmr"
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>

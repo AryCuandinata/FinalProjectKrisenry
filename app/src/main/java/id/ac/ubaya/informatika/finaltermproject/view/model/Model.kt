@@ -46,7 +46,9 @@ data class Report(
     @ColumnInfo(name="Date")
     var date:String,
     @ColumnInfo(name="Calories")
-    var calories: Int?
+    var calories: Int?,
+    @ColumnInfo(name="Status")
+    var status: String
 ){
     @PrimaryKey(autoGenerate = true)
     var uuid:Int=0
