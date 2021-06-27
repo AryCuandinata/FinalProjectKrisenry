@@ -1,8 +1,6 @@
 package id.ac.ubaya.informatika.finaltermproject.view.view
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,10 +8,6 @@ import id.ac.ubaya.informatika.finaltermproject.R
 import id.ac.ubaya.informatika.finaltermproject.databinding.FoodLogItemListBinding
 import id.ac.ubaya.informatika.finaltermproject.view.model.FoodLog
 import id.ac.ubaya.informatika.finaltermproject.view.model.User
-import kotlinx.android.synthetic.main.food_log_item_list.view.*
-import kotlinx.android.synthetic.main.fragment_food_log.view.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>, val userList: ArrayList<User>):RecyclerView.Adapter<FoodLogAdapter.FoodLogViewHolder>() {
 
@@ -30,15 +24,15 @@ class FoodLogAdapter(val foodLogList: ArrayList<FoodLog>, val userList: ArrayLis
         return foodLogList.size
     }
 
-    fun updateFoodLogList(newTodoList: List<FoodLog>) {
+    fun updateFoodLogList(newFoodLogList: List<FoodLog>) {
         foodLogList.clear()
-        foodLogList.addAll(newTodoList)
+        foodLogList.addAll(newFoodLogList)
         notifyDataSetChanged()
     }
 
-    fun updateFoodLogListUser(newTodoListUser: List<User>) {
+    fun updateFoodLogListUser(newFoodLogListUser: List<User>) {
         userList.clear()
-        userList.addAll(newTodoListUser)
+        userList.addAll(newFoodLogListUser)
         notifyDataSetChanged()
     }
 
