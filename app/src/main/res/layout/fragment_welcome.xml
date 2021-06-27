@@ -12,9 +12,6 @@
             name="radioListener"
             type="id.ac.ubaya.informatika.finaltermproject.view.view.RadioClick" />
         <variable
-            name="radioListenerGender"
-            type="id.ac.ubaya.informatika.finaltermproject.view.view.RadioClickGender" />
-        <variable
             name="listener"
             type="id.ac.ubaya.informatika.finaltermproject.view.view.StartJourneyClick" />
     </data>
