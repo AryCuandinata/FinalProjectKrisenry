@@ -53,6 +53,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtName"
                     app:layout_constraintVertical_bias="1.0" />
 
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Cal"
+                    app:layout_constraintStart_toEndOf="@+id/txtCalories"
+                    app:layout_constraintTop_toTopOf="@+id/txtCalories" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

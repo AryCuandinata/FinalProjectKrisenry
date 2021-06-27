@@ -46,6 +46,7 @@ class FoodLogFragment : Fragment(),FabListener {
         val date = LocalDateTime.now()
         val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
         val currentDate = date.format(format)
+        textViewDate.text = currentDate.toString()
 
         viewModelUser = ViewModelProvider(this).get(ListEditUser::class.java)
         viewModelUser.fetch(1)
@@ -77,9 +78,7 @@ class FoodLogFragment : Fragment(),FabListener {
                     }
                     textViewCal.text = currCalories.toString()
                     status()
-
                 }
-
             })
     }
 
@@ -99,6 +98,7 @@ class FoodLogFragment : Fragment(),FabListener {
         else{
             textViewStatus.text = "Normal"
         }
+        progressBar.progress = calories.toInt()
     }
 
     fun observeViewModelUser() {
@@ -111,14 +111,14 @@ class FoodLogFragment : Fragment(),FabListener {
                 } else{
                     bmr = it.bmr!!
                     Log.d("bmr",bmr.toString())
-                    textViewCal.text = it.bmr.toString()
+                    textViewCal2.text = it.bmr.toString()
                 }
 
         })
     }
 
     override fun onFabListener(v: View) {
-        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment()
+        val action = FoodLogFragmentDirections.actionItemFoodLogToLogAMealFragment(bmr-currCalories)
         Navigation.findNavController(v).navigate(action)
     }
 

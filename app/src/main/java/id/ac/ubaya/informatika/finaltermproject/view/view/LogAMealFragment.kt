@@ -1,6 +1,7 @@
 package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +50,9 @@ class LogAMealFragment : Fragment() {
         viewModelReport = ViewModelProvider(this).get(ListReportViewModel::class.java)
         viewModelReport.refresh()
 
+        val neededCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).neededCalories
+        txtCal.text = neededCalories.toString() + " Cal needed for today"
+
         btnLogThisMeal.setOnClickListener {
             val date = LocalDateTime.now()
             val format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
@@ -62,16 +66,32 @@ class LogAMealFragment : Fragment() {
             viewModel.logAMeal(listFoodLog)
 
             var model2 = Report(currentDate, txtCalorieApprox.text.toString().toInt())
-            for (i in listReport)
-                if(i.date.toString()==currentDate) {
-                    var newCalories: Int =
-                        i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
-                    viewModelReport.update(currentDate, newCalories)
+            Log.d("aaaa", 1.toString())
+            if (listReport.count() != 0 )
+            {
+                Log.d("aaaa", 1.toString())
+                for (i in listReport) {
+                    Log.d("aaaa", 1.toString())
+                    if (i.date.toString() == currentDate) {
+                        Log.d("aaaa", 1.toString())
+                        var newCalories: Int =
+                                i.calories!!.toInt() + txtCalorieApprox.text.toString().toInt()
+                        Log.d("aaaa", 1.toString())
+                        viewModelReport.update(currentDate, newCalories)
+                    } else {
+                        val nListReport = listOf(model2)
+                        Log.d("aaaa", 0.toString())
+                        viewModelReport.insertReport(nListReport)
+                    }
                 }
-            else {
-                    val nListReport = listOf(model2)
-                    viewModelReport.insertReport(nListReport)
-                }
+            }
+            else
+            {
+                val nListReport = listOf(model2)
+                Log.d("aaaa", 0.toString())
+                viewModelReport.insertReport(nListReport)
+            }
+
 
             Toast.makeText(view.context, "Data added", Toast.LENGTH_LONG).show()
             Navigation.findNavController(it).popBackStack()
