@@ -43,22 +43,25 @@ class FoodLogFragment : Fragment(),FabListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val date = LocalDateTime.now()
-        val format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
-        val currentDate = date.format(format)
+        var date = LocalDateTime.now()
+        var format = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+        var currentDate = date.format(format)
         textViewDate.text = currentDate.toString()
 
         viewModelUser = ViewModelProvider(this).get(ListEditUser::class.java)
         viewModelUser.fetch(1)
 
         viewModel = ViewModelProvider(this).get(ListFoodLogViewModel::class.java)
+
+        date = LocalDateTime.now()
+        format = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        currentDate = date.format(format)
         viewModel.refresh(currentDate)
 
         recViewFoodLog.layoutManager = LinearLayoutManager(context)
         recViewFoodLog.adapter = foodLogAdapter
 
         databinding.listener = this
-
 
         observeViewModel()
         observeViewModelUser()
