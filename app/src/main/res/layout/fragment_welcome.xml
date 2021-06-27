@@ -72,8 +72,9 @@
                 android:id="@+id/radioButtonMaintain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tag="1"
+                android:checked="true"
 
+                android:tag="1"
                 android:text="Maintain Weight" />
 
             <RadioButton
@@ -106,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Weight"
-                />
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -123,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Height"
-                />
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -141,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Age"
-                />
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -188,8 +189,9 @@
                 android:id="@+id/radioMale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:tag="1"
+                android:checked="true"
 
+                android:tag="1"
                 android:text="Male" />
 
             <RadioButton

@@ -1,6 +1,7 @@
 package id.ac.ubaya.informatika.finaltermproject.view.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -65,6 +66,7 @@ class ProfileFragment : Fragment(), ProfileSaveChangesClick,RadioClick{
             Toast.makeText(v.context, "Cannot Update Profile", Toast.LENGTH_SHORT).show()
         } else {
             var calories:Double
+            Log.d("weight2",obj.weight.toString())
             if(obj.gender.toString().toInt() == 1)
             {
                 calories =
@@ -76,7 +78,8 @@ class ProfileFragment : Fragment(), ProfileSaveChangesClick,RadioClick{
                     9.247 * obj.weight.toString().toDouble() + obj.height.toString().toDouble() - 4.330 * obj.age.toString().toDouble() + 447.593
             }
             viewModel.update(obj.name.toString(), obj.age.toString().toInt(), obj.gender.toString().toInt(), obj.weight.toString().toInt(),
-                    obj.height.toString().toInt() , calories.toInt(), obj.uuid)
+                   obj.height.toString().toInt() , calories.toInt(), obj.uuid)
+            Log.d("weight1",obj.weight.toString())
             Toast.makeText(v.context, "Profile Updated", Toast.LENGTH_SHORT).show()
         }
     }
