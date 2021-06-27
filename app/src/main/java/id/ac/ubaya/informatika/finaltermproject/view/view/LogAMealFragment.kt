@@ -50,7 +50,8 @@ class LogAMealFragment : Fragment() {
         viewModelReport = ViewModelProvider(this).get(ListReportViewModel::class.java)
         viewModelReport.refresh()
 
-        val neededCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).neededCalories
+        var neededCalories = LogAMealFragmentArgs.fromBundle(requireArguments()).neededCalories
+        if(neededCalories < 0) neededCalories = 0
         txtCal.text = neededCalories.toString() + " Cal needed for today"
 
         btnLogThisMeal.setOnClickListener {
