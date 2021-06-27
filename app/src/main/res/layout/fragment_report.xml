@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.ReportFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+    <variable
+        name="report"
+        type="id.ac.ubaya.informatika.finaltermproject.view.model.Report" />
 
+    </data>
+
+<FrameLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".view.view.ReportFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -44,3 +51,4 @@
             app:layout_constraintTop_toBottomOf="@+id/txtDate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
+    </layout>
